@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>മരണവാർത്ത പോസ്റ്റർ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans Malayalam', sans-serif;
+      background-color: #000;
+    }
+    .poster-container {
+      width: 1080px;
+      height: 1350px;
+      background-color: #0a0e2a; /* ✅ Dark blue BG */
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      margin: 0 auto;
+      color: white;
+      padding: 40px 40px;
+      box-sizing: border-box;
+      border-radius: 12px;
+    }
+
+    .profile-pic,
+    #uploaded-photo {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      margin: 20px auto;
+      border: 8px solid white;
+      object-fit: cover;
+      display: block;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .big {
+      font-size: 64px;
+      font-weight: bold;
+    }
+
+    .medium {
+      font-size: 36px;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .small {
+      font-size: 26px;
+    }
+
+    .arabic {
+      font-size: 70px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .namaskaram-box {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 16px;
+      padding: 30px 20px;
+      margin: 40px auto;
+      width: 90%;
+      text-align: center;
+    }
+
+    .footer {
+      background-color: white;
+      color: black;
+      text-align: center;
+      font-size: 28px;
+      padding: 10px;
+      border-radius: 14px;
+      font-weight: bold;
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .post-date {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 20px;
+      text-align: right;
+    }
+
+    .input-area {
+      width: 100%;
+      max-width: 600px;
+      margin: 40px auto;
+      text-align: center;
+    }
+
+    .input-area input[type="text"] {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      font-size: 16px;
+    }
+
+    .download-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 24px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="poster-container" id="poster">
+    <div class="post-date" id="post-date">POST DATE<br>DD/MM/YYYY</div>
+    <br><div class="arabic">إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ</div><br>
+
+    <div class="text-center">
+      <img id="uploaded-photo" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Uploaded Photo">
+      <br><div class="medium" id="mahall">മഹല്ല് മഹല്ലിൽ താമസിക്കുന്ന</div>
+      <br><div class="medium bold" id="address">വീട്ടുവിലാസം</div>
+      <br><div class="big" id="name">പേര്</div>
+      <br><div class="medium">മരണപ്പെട്ടു</div>
+    </div>
+
+    <div class="namaskaram-box">
+      <u><div class="medium bold">മയ്യിത്ത് നമസ്കാരം</div></u>
+      <br><div class="medium bold" id="day">Day, Date</div>
+      <br><div class="medium bold" id="time">Time</div>
+      <br><div class="medium bold" id="place">Place</div>
+    </div>
+
+    <div class="footer" id="footer">WISDOM ISLAMIC ORGANIZATION ZONE NAME</div>
+  </div>
+
+  <button class="download-btn" onclick="downloadPoster()">Download Poster</button>
+
+  <div class="input-area">
+    <input type="text" placeholder="മഹല്ല് പേര്" oninput="document.getElementById('mahall').innerText = this.value + ' മഹല്ലിൽ താമസിക്കുന്ന'">
+    <input type="text" placeholder="വിലാസം" oninput="document.getElementById('address').innerText = this.value">
+    <input type="text" placeholder="പേര് (age)" oninput="document.getElementById('name').innerText = this.value">
+    <input type="text" placeholder="തീയതി (Day, Date)" oninput="document.getElementById('day').innerText = this.value">
+    <input type="text" placeholder="സമയം" oninput="document.getElementById('time').innerText = this.value">
+    <input type="text" placeholder="നമസ്ക്കാര സ്ഥലം" oninput="document.getElementById('place').innerText = this.value">
+    <input type="text" placeholder="Zone Name" oninput="document.getElementById('footer').innerText = 'WISDOM ISLAMIC ORGANIZATION ' + this.value">
+    <input type="text" placeholder="Post Date" oninput="document.getElementById('post-date').innerHTML = 'POST DATE<br>' + this.value">
+    <input type="file" accept="image/*" onchange="loadPhoto(event)">
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    function loadPhoto(event) {
+      const image = document.getElementById('uploaded-photo');
+      image.src = URL.createObjectURL(event.target.files[0]);
+    }
+
+    function downloadPoster() {
+      html2canvas(document.getElementById("poster"), {
+        useCORS: true,
+        backgroundColor: null
+      }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "poster.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    }
+  </script>
+</body>
+</html>
